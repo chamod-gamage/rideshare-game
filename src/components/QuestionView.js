@@ -11,15 +11,13 @@ const QuestionView = ({ title, options, setOption, index }) => {
   return (
     <FormControl>
       <FormLabel>{title}</FormLabel>
-      <RadioGroup
-        value={value}
-        onChange={(e) => {
-          setValue(e.target.value);
-          setOption(e.target.value);
-        }}
-      >
+      <RadioGroup value={value}>
         {options.map((opt) => (
           <FormControlLabel
+            onClick={() => {
+              setValue(opt.title);
+              setOption({ index: index, option: opt });
+            }}
             value={opt.title}
             control={<Radio />}
             label={opt.title}
