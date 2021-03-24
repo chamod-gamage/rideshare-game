@@ -4,6 +4,7 @@ import { Questions } from "./Questions";
 import "./App.css";
 
 function App() {
+  const 
   const [selected, setSelected] = useState([]);
 
   const handleSelect = ({ index, option }) => {
