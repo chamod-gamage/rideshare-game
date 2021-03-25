@@ -82,3 +82,5 @@ const Questions = {
     next: "d-2",
   },
 };
+
+export { Questions };
