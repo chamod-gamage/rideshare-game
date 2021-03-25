@@ -23,7 +23,7 @@ const Questions = {
     options: [
       {
         potential: { 0: "r-1-1-1" },
-        text: "Go to result A-A",
+        text: "Go to result r-1-1-1",
         impact: {
           cash: 5,
           health: -5,
@@ -95,18 +95,26 @@ const Questions = {
   },
   "r-1-1-1": {
     text: "This is result A-A. The impacts are encoded below",
+    subtext:
+      "This is result A-A. The impacts are encoded belowThis is result A-A. The impacts are encoded belowThis is result A-A. The impacts are encoded belowThis is result A-A. The impacts are encoded below",
     next: "d-2",
   },
   "r-1-1-2": {
     text: "This is result A-B. The impacts are encoded below",
+    subtext:
+      "This is result A-A. The impacts are encoded belowThis is result A-A. The impacts are encoded belowThis is result A-A. The impacts are encoded belowThis is result A-A. The impacts are encoded below",
     next: "d-2",
   },
   "r-1-2-1": {
     text: "This is result B-A. The impacts are encoded below",
+    subtext:
+      "This is result A-A. The impacts are encoded belowThis is result A-A. The impacts are encoded belowThis is result A-A. The impacts are encoded belowThis is result A-A. The impacts are encoded below",
     next: "d-2",
   },
   "r-1-2-2": {
     text: "This is result B-B. The impacts are encoded below",
+    subtext:
+      "This is result A-A. The impacts are encoded belowThis is result A-A. The impacts are encoded belowThis is result A-A. The impacts are encoded belowThis is result A-A. The impacts are encoded below",
     next: "d-2",
   },
 };

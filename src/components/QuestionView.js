@@ -46,7 +46,7 @@ const QuestionView = ({
   };
 
   return (
-    <Card style={{ minWidth: "600px" }}>
+    <Card style={{ minWidth: "600px", minHeight: "600px" }}>
       <CardContent>
         <Typography variant="h6">{data.text}</Typography>
         {isDecision ? (
@@ -66,26 +66,29 @@ const QuestionView = ({
                 ))}
               </RadioGroup>
             </FormControl>
-            <Row>
-              {id !== "d-1" && (
-                <Button disabled={id === "d-1"} onClick={() => goBack()}>
-                  Previous
-                </Button>
-              )}
-              <Button
-                disabled={!option}
-                onClick={() => {
-                  modifyState(option.impact);
-                  goNext(nextID(option.potential));
-                }}
-              >
-                Continue
-              </Button>
-            </Row>
           </>
         ) : (
-          <></>
+          <>
+            <Typography style={{ paddingTop: "12px" }} variant="body1">
+              {data.subtext}
+            </Typography>
+          </>
         )}
+
+        <Row style={{ justifyContent: "flex-end" }}>
+          {id !== "d-1" && <Button onClick={() => goBack()}>Previous</Button>}
+          <Button
+            disabled={isDecision && !option}
+            onClick={() => {
+              if (isDecision) {
+                modifyState(option.impact);
+                goNext(nextID(option.potential));
+              } else goNext(data.next);
+            }}
+          >
+            Continue
+          </Button>
+        </Row>
       </CardContent>
     </Card>
   );
