@@ -8,7 +8,7 @@ import "./App.css";
 const useStyles = makeStyles({
   container: {
     height: "100vh",
-    padding: "20% 15%",
+    padding: "15%",
   },
   centered: {
     display: "flex",
