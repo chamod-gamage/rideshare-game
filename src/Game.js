@@ -4,6 +4,7 @@ import { Container, Row, Col } from "reactstrap";
 import { Questions } from "./Questions";
 import { makeStyles } from "@material-ui/core/styles";
 import LocalAtmIcon from "@material-ui/icons/LocalAtm";
+import { useHistory } from "react-router-dom";
 import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import "./App.css";
@@ -26,6 +27,7 @@ const useStyles = makeStyles({
   header: {
     fontWeight: "bold",
     fontSize: "2rem",
+    cursor: "pointer",
   },
   statText: {
     lineHeight: "2rem",
@@ -36,6 +38,7 @@ const useStyles = makeStyles({
 
 const Game = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [cash, setCash] = useState(20000);
   const [health, setHealth] = useState(100);
   const [rating, setRating] = useState([]);
@@ -101,7 +104,10 @@ const Game = () => {
           <div>
             <Row style={{ margin: 0 }}>
               <Col xs="6">
-                <h1 className={classes.header}>
+                <h1
+                  onClick={() => history.push("/")}
+                  className={classes.header}
+                >
                   Steer<span style={{ color: "#579fa3" }}>.ai 🚘</span>
                 </h1>
               </Col>

@@ -10,6 +10,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { CardMedia } from "@material-ui/core";
+import ReplayIcon from "@material-ui/icons/Replay";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -29,6 +31,7 @@ const QuestionView = ({
   goBack,
 }) => {
   const classes = useStyles();
+  const history = useHistory();
   const [value, setValue] = useState("");
   const [option, setOption] = useState();
   const nextID = (potential) => {
@@ -75,6 +78,17 @@ const QuestionView = ({
         )}
 
         <Row style={{ justifyContent: "flex-end", margin: 0 }}>
+          <ReplayIcon
+            style={{
+              cursor: "pointer",
+              color: "lightgray",
+              margin: "4px 8px 0 0",
+            }}
+            onClick={() => {
+              window.location.reload();
+            }}
+          />
+
           {showPrev && (
             <Button
               onClick={() => {
@@ -84,6 +98,7 @@ const QuestionView = ({
               Undo
             </Button>
           )}
+
           <Button
             disabled={isDecision && !option}
             onClick={() => {
