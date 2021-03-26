@@ -105,7 +105,7 @@ const Questions = {
       "https://cdn.financebuzz.com/images/2018/06/19/uber-app-not-working.jpg",
     subtext:
       "This is result A-A. The impacts are encoded belowThis is result A-A. The impacts are encoded belowThis is result A-A. The impacts are encoded belowThis is result A-A. The impacts are encoded below",
-    next: "d-2",
+    next: "end",
   },
   "r-1-1-2": {
     text: "This is result A-B. The impacts are encoded below",

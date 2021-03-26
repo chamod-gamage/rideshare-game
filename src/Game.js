@@ -67,7 +67,14 @@ const Game = () => {
   };
 
   const goNext = (id) => {
-    setFade(true);
+    if (id === "end")
+      history.push({
+        pathname: "/result",
+        state: {
+          data: { cash, health, rating: computeRating(rating), environment },
+        },
+      });
+    else setFade(true);
     setSelected(id);
   };
 
@@ -108,7 +115,7 @@ const Game = () => {
                   onClick={() => history.push("/")}
                   className={classes.header}
                 >
-                  Steer<span style={{ color: "#579fa3" }}>.ai 🚘</span>
+                  steer<span style={{ color: "#579fa3" }}>.ai 🚘</span>
                 </h1>
               </Col>
               <Col className={classes.left} style={{ padding: 0 }}>

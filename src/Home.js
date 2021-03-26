@@ -9,6 +9,9 @@ const useStyles = makeStyles({
   container: {
     height: "100vh",
     padding: "15%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   centered: {
     display: "flex",
@@ -40,30 +43,34 @@ const Home = () => {
   return (
     <div style={{ backgroundImage: "linear-gradient(#fffcf8, #b7dfe9)" }}>
       <Container className={classes.container}>
-        <Row className={classes.centered}>
-          <h1 className={classes.header}>
-            Steer<span style={{ color: "#579fa3" }}>.ai 🚘</span>
-          </h1>
-        </Row>
-        <Row className={classes.centered}>
-          <p style={{ color: "gray" }}>adskfjlskfnfmkfnmsdmnmsldmnsdlk</p>
-        </Row>
-        <Row className={classes.centered}>
-          <Button
-            style={{
-              marginTop: "32px",
-              border: "2px solid rgba(87, 159, 163, 0.5)",
-            }}
-            onClick={() => {
-              history.push("/game");
-            }}
-            size="large"
-            variant="outlined"
-            color="primary"
-          >
-            Let's Go
-          </Button>
-        </Row>
+        <div>
+          <Row className={classes.centered}>
+            <h1 className={classes.header}>
+              steer<span style={{ color: "#579fa3" }}>.ai 🚘</span>
+            </h1>
+          </Row>
+          <Row className={classes.centered}>
+            <p style={{ color: "gray" }}>
+              How long you can last in the ridesharing industry?
+            </p>
+          </Row>
+          <Row className={classes.centered}>
+            <Button
+              style={{
+                marginTop: "32px",
+                border: "2px solid rgba(87, 159, 163, 0.5)",
+              }}
+              onClick={() => {
+                history.push("/game");
+              }}
+              size="large"
+              variant="outlined"
+              color="primary"
+            >
+              Let's Go
+            </Button>
+          </Row>
+        </div>
       </Container>
     </div>
   );
