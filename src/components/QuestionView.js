@@ -1,52 +1,51 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import { Container, Row, Col } from "reactstrap";
-
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { CardHeader } from "@material-ui/core";
+import { CardMedia } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  root: {
+    borderRadius: "8px",
+    width: "600px",
+    marginTop: "36px",
+  },
+});
 
 const QuestionView = ({
   id,
   data,
-  stateController,
+  modifyState,
   isDecision,
+  showPrev,
   goNext,
   goBack,
 }) => {
+  const classes = useStyles();
   const [value, setValue] = useState("");
   const [option, setOption] = useState();
-
-  const modifyState = (impact) => {
-    for (const [key, value] of Object.entries(impact)) {
-      const curVal = stateController[key].val;
-      if (Array.isArray(curVal)) {
-        curVal.push(value);
-        stateController[key].setVal(curVal);
-      } else stateController[key].setVal(curVal + value);
-    }
-  };
-
   const nextID = (potential) => {
     const random = Math.random();
     let randomID;
     for (const [key, value] of Object.entries(potential)) {
       randomID = value;
-      if (value >= random) break;
+      if (key >= random) break;
     }
     return randomID;
   };
 
   return (
-    <Card style={{ minWidth: "600px", minHeight: "600px" }}>
+    <Card className={classes.root}>
+      {data.picture && (
+        <CardMedia style={{ height: "275px" }} image={data.picture} />
+      )}
       <CardContent>
         <Typography variant="h6">{data.text}</Typography>
         {isDecision ? (
@@ -75,14 +74,24 @@ const QuestionView = ({
           </>
         )}
 
-        <Row style={{ justifyContent: "flex-end" }}>
-          {id !== "d-1" && <Button onClick={() => goBack()}>Previous</Button>}
+        <Row style={{ justifyContent: "flex-end", margin: 0 }}>
+          {showPrev && (
+            <Button
+              onClick={() => {
+                goBack();
+              }}
+            >
+              Undo
+            </Button>
+          )}
           <Button
             disabled={isDecision && !option}
             onClick={() => {
+              setOption();
+              setValue("");
               if (isDecision) {
-                modifyState(option.impact);
                 goNext(nextID(option.potential));
+                modifyState(option.impact);
               } else goNext(data.next);
             }}
           >
