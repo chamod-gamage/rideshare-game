@@ -9,6 +9,10 @@ import StarBorderIcon from "@material-ui/icons/StarBorder";
 import "./App.css";
 
 const useStyles = makeStyles({
+  container: {
+    height: "100vh",
+    padding: "10% 15%",
+  },
   centered: {
     display: "flex",
     justifyContent: "center",
@@ -24,7 +28,8 @@ const useStyles = makeStyles({
     fontSize: "2rem",
   },
   statText: {
-    lineHeight: "3rem",
+    lineHeight: "2rem",
+    fontSize: "14px",
     color: "gray",
   },
 });
@@ -90,8 +95,11 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Container style={{ padding: "5% 15%" }}>
+    <div
+      className="App"
+      style={{ backgroundImage: "linear-gradient(#fffcf8, #b7dfe9)" }}
+    >
+      <Container className={classes.container}>
         <Row className={classes.centered}>
           <div>
             <Row style={{ margin: 0 }}>
@@ -103,7 +111,8 @@ function App() {
               <Col className={classes.left} style={{ padding: 0 }}>
                 <span className={classes.statText}>
                   <LocalAtmIcon />
-                  <span style={{ marginRight: "8px" }}>{cash}</span>
+                  <span style={{ margin: "0 12px" }}>{cash}</span>
+
                   {renderStars(computeRating(rating))}
                   {/* {`cash:${cash} health:${health} rating:${rating} enviro:${environment}`} */}
                 </span>

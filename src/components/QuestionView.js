@@ -13,7 +13,7 @@ import { CardMedia } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
-    borderRadius: "8px",
+    borderRadius: "12px",
     width: "600px",
     marginTop: "36px",
   },
@@ -46,7 +46,7 @@ const QuestionView = ({
       {data.picture && (
         <CardMedia style={{ height: "275px" }} image={data.picture} />
       )}
-      <CardContent>
+      <CardContent style={{ padding: "20px 32px" }}>
         <Typography variant="h6">{data.text}</Typography>
         {isDecision ? (
           <>
