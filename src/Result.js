@@ -58,7 +58,7 @@ const Result = () => {
   const location = useLocation();
   const history = useHistory();
   const classes = useStyles();
-  const data = location.state.data;
+  const data = (location && location.state && location.state.data) || null;
 
   const renderStars = (rating) => {
     const roundedRating = Math.round(rating);
@@ -72,19 +72,32 @@ const Result = () => {
     return stars;
   };
 
+  if (!data || !data.id || data.id !== "end") {
+    history.push("/");
+    return <></>;
+  }
+
   return (
-    <div style={{ backgroundImage: "linear-gradient(#fffcf8, #b7dfe9)" }}>
+    <div
+      style={{
+        backgroundImage: "linear-gradient(#fffcf8, #b7dfe9)",
+        overflow: "auto",
+      }}
+    >
       <Container className={classes.container}>
         <Row>
           <Row style={{ margin: 0, width: "100%" }}>
-            <h1 className={classes.header} onClick={() => history.push("/")}>
-              steer<span style={{ color: "#579fa3" }}>.ai 🚘</span>
-            </h1>
+            <Col>
+              <h1 className={classes.header} onClick={() => history.push("/")}>
+                steer<span style={{ color: "#579fa3" }}>.ai 🚘</span>
+              </h1>
+            </Col>
+            <Col style={{ display: "flex", justifyContent: "flex-end" }}>
+              <Typography variant="h5" className={classes.scoreText}>
+                Final Score: <span style={{ color: "#579fa3" }}> 96</span>
+              </Typography>
+            </Col>
           </Row>
-
-          <Typography variant="h5" className={classes.scoreText}>
-            Final Score: <span style={{ color: "#579fa3" }}> 96</span>
-          </Typography>
 
           <Card className={classes.card}>
             <CardContent>
@@ -185,6 +198,7 @@ const Result = () => {
             </CardContent>
           </Card>
         </Row>
+        <br />
       </Container>
     </div>
   );

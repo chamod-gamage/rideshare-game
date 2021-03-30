@@ -36,13 +36,20 @@ const useStyles = makeStyles({
   },
 });
 
+const initialValues = {
+  cash: 20000,
+  health: 100,
+  rating: [],
+  environment: 1000,
+};
+
 const Game = () => {
   const classes = useStyles();
   const history = useHistory();
-  const [cash, setCash] = useState(20000);
-  const [health, setHealth] = useState(100);
-  const [rating, setRating] = useState([]);
-  const [environment, setEnvironment] = useState(1000);
+  const [cash, setCash] = useState(initialValues.cash);
+  const [health, setHealth] = useState(initialValues.health);
+  const [rating, setRating] = useState(initialValues.rating);
+  const [environment, setEnvironment] = useState(initialValues.environment);
   const [selected, setSelected] = useState("d-1");
   const [showPrev, setShowPrev] = useState(false);
   const [previous, setPrevious] = useState({});
@@ -71,7 +78,13 @@ const Game = () => {
       history.push({
         pathname: "/result",
         state: {
-          data: { cash, health, rating: computeRating(rating), environment },
+          data: {
+            cash,
+            health,
+            rating: computeRating(rating),
+            environment,
+            id,
+          },
         },
       });
     else setFade(true);
