@@ -5,6 +5,9 @@ import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { useHistory, useLocation } from "react-router-dom";
 import Card from "@material-ui/core/Card";
+import Grid from "@material-ui/core/Grid";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
@@ -54,12 +57,14 @@ const useStyles = makeStyles({
   },
 });
 
+const TabToSection = ["rating", "cash", "environment", "health"];
+
 const Result = () => {
   const location = useLocation();
   const history = useHistory();
   const classes = useStyles();
   const data = (location && location.state && location.state.data) || null;
-
+  const [section, setSection] = React.useState("rating");
   const renderStars = (rating) => {
     const roundedRating = Math.round(rating);
     var stars = [];
@@ -108,50 +113,127 @@ const Result = () => {
               >
                 Here's a breakdown of your score:
               </Typography>
-              <Row style={{ margin: "0", padding: "8px 0 16px 0" }}>
-                <Col>
-                  <Row>
-                    <span className={classes.caption}>
-                      Average rider rating of {data.rating}
-                    </span>
-                  </Row>
-                  <Row>
-                    <span style={{ color: "gray" }}>
-                      {renderStars(data.rating)}
-                    </span>
-                  </Row>
-                </Col>
-                <Col>
-                  <Row>
-                    <span className={classes.caption}>Finished with</span>
-                  </Row>
-                  <Row>
-                    <span className={classes.statText}> {data.cash} CAD</span>
-                  </Row>
-                </Col>
-                <Col>
-                  <Row>
-                    <span className={classes.caption}>Environment rating</span>
-                  </Row>
-                  <Row>
-                    <span className={classes.statText}>
-                      {" "}
-                      {data.environment}
-                    </span>
-                  </Row>
-                </Col>
-                <Col>
-                  <Row>
-                    <span className={classes.caption}>Driver health</span>
-                  </Row>
-                  <Row>
-                    <span className={classes.statText}>
-                      {" "}
-                      {data.health} /100
-                    </span>
-                  </Row>
-                </Col>
-              </Row>
+              {/* <Row
+                style={{
+                  margin: "0",
+                  padding: "8px 0 16px 0",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              > */}
+              {/* <Grid */}
+              {/* style={{
+                  margin: "0",
+                  padding: "8px 0 16px 0",
+                }}
+                container
+                spacing={3}
+              > */}
+              <Tabs
+                value={TabToSection.indexOf(section)}
+                onChange={(event, newVal) => setSection(TabToSection[newVal])}
+                variant="scrollable"
+                scrollButtons="off"
+              >
+                {/* <Grid item xs={3}> */}
+                <Tab
+                  component={() => (
+                    <Col
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        setSection(TabToSection[0]);
+                      }}
+                    >
+                      <Row>
+                        <span className={classes.caption}>
+                          Average rider rating of {data.rating}
+                        </span>
+                      </Row>
+                      <Row>
+                        <span style={{ color: "gray" }}>
+                          {renderStars(data.rating)}
+                        </span>
+                      </Row>
+                      <div style={{ height: 5 }} />
+                    </Col>
+                  )}
+                />
+                {/* </Grid> */}
+                {/* <Grid item xs={3}> */}
+                <Tab
+                  component={() => (
+                    <Col
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        setSection(TabToSection[1]);
+                      }}
+                    >
+                      <Row>
+                        <span className={classes.caption}>Finished with</span>
+                      </Row>
+                      <Row>
+                        <span className={classes.statText}>
+                          {" "}
+                          {data.cash} CAD
+                        </span>
+                      </Row>
+                      <div style={{ height: 5 }} />
+                    </Col>
+                  )}
+                />
+                {/* </Grid> */}
+                {/* <Grid item xs={3}> */}
+                <Tab
+                  component={() => (
+                    <Col
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        setSection(TabToSection[2]);
+                      }}
+                    >
+                      <Row>
+                        <span className={classes.caption}>
+                          Environment rating
+                        </span>
+                      </Row>
+                      <Row>
+                        <span className={classes.statText}>
+                          {" "}
+                          {data.environment}
+                        </span>
+                      </Row>
+                      <div style={{ height: 5 }} />
+                    </Col>
+                  )}
+                />
+                {/* </Grid> */}
+                {/* <Grid item xs={3}> */}
+                <Tab
+                  component={() => (
+                    <Col
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        setSection(TabToSection[3]);
+                      }}
+                    >
+                      <Row>
+                        <span className={classes.caption}>Driver health</span>
+                      </Row>
+                      <Row>
+                        <span className={classes.statText}>
+                          {" "}
+                          {data.health} /100
+                        </span>
+                      </Row>
+                      <div style={{ height: 5 }} />
+                    </Col>
+                  )}
+                />
+                {/* </Grid> */}
+              </Tabs>
+              <div style={{ height: 15 }} />
+              {/* </Grid> */}
               <CardMedia
                 style={{
                   height: "275px",
