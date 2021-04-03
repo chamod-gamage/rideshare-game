@@ -116,7 +116,7 @@ const Result = () => {
       })
       .then(() => {
         db.collection("scores")
-          .orderBy("score")
+          .orderBy("score", "desc")
           .get()
           .then((querySnapshot) => {
             let newBoard = [];
