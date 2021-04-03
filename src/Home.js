@@ -1,9 +1,10 @@
-import React from "react";
-import { Container, Row, Col } from "reactstrap";
+import React, { useState } from "react";
+import { Container, Row } from "reactstrap";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import "./App.css";
+import { TextField } from "@material-ui/core";
 
 const useStyles = makeStyles({
   container: {
@@ -39,7 +40,7 @@ const useStyles = makeStyles({
 const Home = () => {
   const history = useHistory();
   const classes = useStyles();
-
+  const [name, setName] = useState(localStorage.getItem("rideshare") || "");
   return (
     <div style={{ backgroundImage: "linear-gradient(#fffcf8, #b7dfe9)" }}>
       <Container className={classes.container}>
@@ -55,12 +56,22 @@ const Home = () => {
             </p>
           </Row>
           <Row className={classes.centered}>
+            <TextField
+              variant="outlined"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Username"
+            />
+          </Row>
+          <Row className={classes.centered}>
             <Button
+              disabled={name === ""}
               style={{
                 marginTop: "32px",
                 border: "2px solid rgba(87, 159, 163, 0.5)",
               }}
               onClick={() => {
+                localStorage.setItem("rideshare", name);
                 history.push("/game");
               }}
               size="large"
