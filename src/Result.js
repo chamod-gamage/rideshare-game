@@ -105,7 +105,9 @@ const Result = () => {
   const addAndReadScores = () => {
     db.collection("scores")
       .add({
-        username: `sampleUser${Math.floor(Math.random() * 100)}`,
+        username:
+          localStorage.getItem("rideshare") ||
+          `guest${Math.floor(Math.random() * 100)}`,
         score: Math.floor(Math.random() * 100),
         cash: data.cash,
         rating: data.rating,
