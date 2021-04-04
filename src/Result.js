@@ -67,7 +67,7 @@ const useStyles = makeStyles({
   },
   scoreText: {
     fontWeight: "bold",
-    paddingTop: "32px",
+    paddingTop: "12px",
     color: "#555555",
   },
 });
@@ -250,7 +250,7 @@ const Result = () => {
           <Row style={{ margin: 0, width: "100%" }}>
             <Col>
               <h1 className={classes.header} onClick={() => history.push("/")}>
-                steer<span style={{ color: "#579fa3" }}>.ai 🚘</span>
+                drive<span style={{ color: "#579fa3" }}>.ai 🚘</span>
               </h1>
             </Col>
             <Col style={{ display: "flex", justifyContent: "flex-end" }}>

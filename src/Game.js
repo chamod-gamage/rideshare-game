@@ -37,10 +37,10 @@ const useStyles = makeStyles({
 });
 
 const initialValues = {
-  cash: 20000,
+  cash: 2000,
   health: 100,
   rating: [],
-  environment: 1000,
+  environment: 100,
 };
 
 const Game = () => {
@@ -63,13 +63,16 @@ const Game = () => {
   };
 
   const modifyState = (impact) => {
-    setShowPrev(true);
-    setPrevious({ selected, cash, health, rating, environment });
-    for (const [key, value] of Object.entries(impact)) {
-      const curVal = stateController[key].val;
-      if (Array.isArray(curVal)) {
-        stateController[key].setVal(curVal.concat([value]));
-      } else stateController[key].setVal(curVal + value);
+    if (impact) {
+      setShowPrev(true);
+      setPrevious({ selected, cash, health, rating, environment });
+      for (const [key, value] of Object.entries(impact)) {
+        console.log(key, value);
+        const curVal = stateController[key].val;
+        if (Array.isArray(curVal)) {
+          stateController[key].setVal(curVal.concat([value]));
+        } else stateController[key].setVal(curVal + value);
+      }
     }
   };
 
@@ -128,7 +131,7 @@ const Game = () => {
                   onClick={() => history.push("/")}
                   className={classes.header}
                 >
-                  steer<span style={{ color: "#579fa3" }}>.ai 🚘</span>
+                  drive<span style={{ color: "#579fa3" }}>.ai 🚘</span>
                 </h1>
               </Col>
               <Col className={classes.left} style={{ padding: 0 }}>

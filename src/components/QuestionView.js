@@ -38,8 +38,8 @@ const QuestionView = ({
     const random = Math.random();
     let randomID;
     for (const [key, value] of Object.entries(potential)) {
-      randomID = value;
       if (key >= random) break;
+      randomID = value;
     }
     return randomID;
   };
@@ -107,7 +107,10 @@ const QuestionView = ({
               if (isDecision) {
                 goNext(nextID(option.potential));
                 modifyState(option.impact);
-              } else goNext(data.next);
+              } else {
+                if (data.impact) modifyState(data.impact);
+                goNext(data.next);
+              }
             }}
           >
             Continue
