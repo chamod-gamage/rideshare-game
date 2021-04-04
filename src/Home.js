@@ -35,6 +35,11 @@ const useStyles = makeStyles({
     fontSize: "14px",
     color: "gray",
   },
+  userField: {
+    "&.MuiFormControl-root": {
+      width: "100%",
+    },
+  },
 });
 
 const Home = () => {
@@ -47,7 +52,7 @@ const Home = () => {
         <div>
           <Row className={classes.centered}>
             <h1 className={classes.header}>
-              steer<span style={{ color: "#579fa3" }}>.ai 🚘</span>
+              drive<span style={{ color: "#579fa3" }}>.ai 🚘</span>
             </h1>
           </Row>
           <Row className={classes.centered}>
@@ -57,10 +62,11 @@ const Home = () => {
           </Row>
           <Row className={classes.centered}>
             <TextField
+              className={classes.userField}
               variant="outlined"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Username"
+              placeholder="Set a nickname"
             />
           </Row>
           <Row className={classes.centered}>
