@@ -73,6 +73,14 @@ const useStyles = makeStyles({
 });
 
 const TabToSection = ["rating", "cash", "environment", "health"];
+const secretFormula = ({ cash, rating, environment, health }) => {
+  return (
+    25 * (cash / 2000) +
+    25 * (rating / 5) +
+    25 * (environment / 100) +
+    25 * (health / 100)
+  );
+};
 
 const Result = () => {
   const location = useLocation();
@@ -108,7 +116,7 @@ const Result = () => {
         username:
           localStorage.getItem("rideshare") ||
           `guest${Math.floor(Math.random() * 100)}`,
-        score: Math.floor(Math.random() * 100),
+        score: secretFormula(data).toFixed(1),
         cash: data.cash,
         rating: data.rating,
         environment: data.environment,
@@ -255,7 +263,11 @@ const Result = () => {
             </Col>
             <Col style={{ display: "flex", justifyContent: "flex-end" }}>
               <Typography variant="h5" className={classes.scoreText}>
-                Final Score: <span style={{ color: "#579fa3" }}> 96</span>
+                Final Score:{" "}
+                <span style={{ color: "#579fa3" }}>
+                  {" "}
+                  {secretFormula(data).toFixed(0)}
+                </span>
               </Typography>
             </Col>
           </Row>
@@ -292,7 +304,7 @@ const Result = () => {
                         >
                           <Row>
                             <span className={classes.caption}>
-                              Average rider rating of {data.rating}
+                              Average rider rating of {data.rating.toFixed(2)}
                             </span>
                           </Row>
                           <Row>
