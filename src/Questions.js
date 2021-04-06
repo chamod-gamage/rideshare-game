@@ -9,7 +9,7 @@ const Questions = {
     text: "This is a choose your own adventure style game",
     picture: "https://media0.giphy.com/media/2jOcXFwhIEypPeQvOY/200.gif",
     subtext:
-      "Progress through the game by making strategic decisions - once you proceed with an option you won't be able to go back! Try your best to earn as much money and as high a rating as possible, but remember - your decisions have an impact on your personal health as well as the environment.",
+      "Progress through the game by making strategic decisions - once you proceed with an option you won't be able to go back! Try your best to earn as much money and as high a rating as possible, but remember - your decisions may impact your personal health as well as the environment.",
     next: "d-1",
   },
 

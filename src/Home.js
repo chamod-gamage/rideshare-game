@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import "./App.css";
 import { TextField } from "@material-ui/core";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   container: {
     height: "100vh",
     padding: "15%",
@@ -28,7 +28,12 @@ const useStyles = makeStyles({
 
   header: {
     fontWeight: "bold",
-    fontSize: "5vw",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "12vw",
+    },
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "6vw",
+    },
   },
   statText: {
     lineHeight: "2rem",
@@ -40,7 +45,7 @@ const useStyles = makeStyles({
       width: "100%",
     },
   },
-});
+}));
 
 const Home = () => {
   const history = useHistory();

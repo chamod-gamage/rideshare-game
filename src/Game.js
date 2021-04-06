@@ -124,10 +124,10 @@ const Game = () => {
     const roundedRating = Math.round(rating);
     var stars = [];
     for (var i = 0; i < roundedRating; i++) {
-      stars.push(<StarIcon style={{ width: "1.2vw" }} />);
+      stars.push(<StarIcon style={{ width: "1.5vw" }} />);
     }
     for (var j = 0; j < 5 - roundedRating; j++) {
-      stars.push(<StarBorderIcon style={{ width: "1.2vw" }} />);
+      stars.push(<StarBorderIcon style={{ width: "1.5vw" }} />);
     }
     return stars;
   };
