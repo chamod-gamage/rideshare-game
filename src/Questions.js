@@ -1,7 +1,20 @@
 const Questions = {
+  r00: {
+    text: "Welcome to your ride-sharing adventure!",
+    picture: "https://media4.giphy.com/media/l1J9w8WgJkwpREQlG/giphy.gif",
+    subtext: "Do you have what it takes to make it in the ride-sharing world?",
+    next: "r-0",
+  },
+  "r-0": {
+    text: "This is a choose your own adventure style game",
+    picture: "https://media0.giphy.com/media/2jOcXFwhIEypPeQvOY/200.gif",
+    subtext:
+      "Progress through the game by making strategic decisions. Once you proceed with an option you won't be able to go back!",
+    next: "d-1",
+  },
+
   "d-1": {
-    text:
-      "Welcome to your ridesharing adventure! You'll start off by choosing your car and setup!",
+    text: "Start off by choosing your car and setup!",
     picture:
       "https://24autonet.com/wp-content/uploads/2020/06/tesla-model-y-vs-toyota-rav4.jpg",
     options: [
@@ -83,7 +96,7 @@ const Questions = {
         potential: { 0: "d-1-4" },
         text: "Take the risk driving without it",
         impact: {
-          health: -8,
+          health: -10,
         },
       },
     ],
@@ -112,8 +125,7 @@ const Questions = {
   "r-1": {
     text:
       "You decide to head out for the day and accept your first ride as an rideshare driver",
-    picture:
-      "https://www.fleeteurope.com/sites/default/files/styles/headlines_width_850/public/field/image/shutterstock_1497227390.jpg?itok=fN8da5cH",
+    picture: "https://i.gifer.com/7rVF.gif",
     subtext: "Time to see what being a ridehsare driver is all about!",
     next: "d-2",
   },
@@ -147,7 +159,7 @@ const Questions = {
         potential: { 0: "r-d-2-2" },
         text: "Visit your authorized auto dealership for repairs (-$150)",
         impact: {
-          cash: -100,
+          cash: -150,
         },
       },
       {
@@ -163,20 +175,21 @@ const Questions = {
   },
   "r-d-2-2": {
     text: "After an hour, your car is all fixed and ready to go",
-    picture: "https://scx2.b-cdn.net/gfx/news/hires/2018/1-driver.jpg",
+    picture:
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-647333471-1586277995.jpg?crop=0.926xw:0.693xh;0.0593xw,0.153xh&resize=640:*",
     subtext: "You hop back in and are excited to get back on the road ",
     next: "d-2-2",
   },
   "d-2-2": {
     text:
-      "You stumble across a trip from Toronto to Waterloo valued at $150. You will likely miss your Dad's birthday since this trip will likely take up most of your day, do you choose to accept?",
+      "You stumble across a trip from Toronto to Waterloo valued at $175. You will likely miss your Dad's birthday since this trip will likely take up most of your day, do you choose to accept?",
     picture: "https://ak.picdn.net/shutterstock/videos/1009460807/thumb/1.jpg",
     options: [
       {
         potential: { 0: "r-2" },
         text: "Accept the trip and start the drive to Waterloo",
         impact: {
-          cash: 150,
+          cash: 175,
           health: -5,
           rating: 4.5,
           environment: -2,
@@ -186,7 +199,7 @@ const Questions = {
         potential: { 0: "r-1-1" },
         text: "Cancel the trip and spend some quality time with your old man",
         impact: {
-          health: 5,
+          health: 8,
         },
       },
     ],
@@ -230,7 +243,7 @@ const Questions = {
         potential: { 0: "r-1-3" },
         text: "Continue waiting",
         impact: {
-          cash: 50,
+          cash: 60,
           environment: -5,
           health: 2,
           rating: 5,
@@ -266,10 +279,10 @@ const Questions = {
   "r-2": {
     text: "After giving out a few more rides, you're ready to call it a day",
     picture:
-      "https://www.allstate.com/resources/Allstate/images/tools-and-resources/car/driving-at-night-getty-680x402.jpg?v=c66c0227-a7ae-2843-3d8e-11f063505e94",
-    subtext: "You pull in an additional $100 from your rides",
+      "https://media2.giphy.com/media/cmynpRzWNbqOl9CdqT/giphy.gif?cid=ecf05e47h829m7vreca8sfizq96r9b99u011y4geqwv34f2g&rid=giphy.gif",
+    subtext: "You pull in an additional $200 from your rides",
     impact: {
-      cash: 100,
+      cash: 200,
     },
     next: "d-3",
   },
@@ -293,7 +306,7 @@ const Questions = {
         potential: { 0: "r-2-1", 0.5: "r-2-2" },
         text: "Try your best to jam it all in, which may damage your interior",
         impact: {
-          cash: 50,
+          cash: 80,
           environment: -3,
           rating: 5,
         },
@@ -330,7 +343,7 @@ const Questions = {
         potential: { 0: "r-2-3" },
         text: "Politely ask them to leave - they may give you a bad rating",
         impact: {
-          rating: 1,
+          rating: 2,
           health: -2,
         },
       },
@@ -339,7 +352,7 @@ const Questions = {
         text:
           "Continue on with the ride, ignoring their drunken conversation in the back ",
         impact: {
-          cash: 30,
+          cash: 60,
           health: -5,
           rating: 4,
           environment: -3,
@@ -354,7 +367,7 @@ const Questions = {
       "https://sanfrancisco.cbslocal.com/wp-content/uploads/sites/15116056/2021/03/Capture-4.jpg",
     subtext: "The riders leave you with a 1 star rating :(",
     impact: {
-      cash: -100,
+      rating: 1,
     },
     next: "r-3",
   },
@@ -365,7 +378,7 @@ const Questions = {
       "https://st4.depositphotos.com/19391574/23206/v/600/depositphotos_232062798-stock-video-womans-leg-in-high-heel.jpg",
     subtext: "That could've went a lot worse!",
     impact: {
-      cash: -100,
+      cash: 50,
     },
     next: "r-3",
   },
@@ -395,12 +408,12 @@ const Questions = {
   },
   "r-3": {
     text:
-      "You give out a few more rides, but the drunk passengers and luggage situation have left you exhausted, you're ready to call it a day",
+      "You give out a few more rides, but the drunk passengers and luggage situation have left you exhausted, you're ready to take a break",
     picture:
-      "https://newscollection.net/wp-content/uploads/2018/01/13UBERHACK-2-superJumbo.jpg",
-    subtext: "You pull in an additional $50 from your rides",
+      "https://media3.giphy.com/media/BwqxBFQprJOTwHtfNE/giphy.gif?cid=ecf05e47cu4hp5yw8kgsrwycfzztkmq58l6agadll6ut2c5p&rid=giphy.gif",
+    subtext: "You pull in an additional $180 from your rides",
     impact: {
-      cash: 50,
+      cash: 180,
     },
     next: "d-4",
   },
@@ -434,12 +447,12 @@ const Questions = {
     options: [
       {
         potential: { 0: "r-3-1", 0.5: "r-3-2" },
-        text: "Pick up, she's your mom",
+        text: "Pick up, she's your mom 🥲",
         impact: {},
       },
       {
         potential: { 0: "r-3-3", 0.5: "r-3-4" },
-        text: "Choose not to answer",
+        text: "Choose not to answer 😎",
         impact: {},
       },
     ],
@@ -450,8 +463,8 @@ const Questions = {
     subtext:
       "The rider found it weird to listen to the whole call, resulting in a lower rating and tip",
     impact: {
-      rating: 3,
-      cash: 20,
+      rating: 3.5,
+      cash: 30,
       environment: -3,
     },
     next: "d-4-2",
@@ -463,7 +476,7 @@ const Questions = {
       "The rider thought your mom seemed very nice and gave you a bigger tip",
     impact: {
       rating: 5,
-      cash: 35,
+      cash: 55,
       environment: -3,
     },
     next: "d-4-2",
@@ -475,7 +488,7 @@ const Questions = {
     subtext: "Your mom gets upset with you for not answering her",
     impact: {
       rating: 4,
-      cash: 30,
+      cash: 35,
       health: -3,
       environment: -3,
     },
@@ -486,8 +499,8 @@ const Questions = {
     picture: "https://i.ytimg.com/vi/TGLCAGbHZ7w/maxresdefault.jpg",
     subtext: "You recieve a good rating and tip from the rider",
     impact: {
-      rating: 4,
-      cash: 30,
+      rating: 5,
+      cash: 55,
       environment: -3,
     },
     next: "d-4-2",
@@ -502,7 +515,6 @@ const Questions = {
         potential: { 0: "d-4-3" },
         text: "You agree to attend and spend an hour driving to get there",
         impact: {
-          cash: -25,
           environment: -5,
         },
       },
@@ -517,7 +529,7 @@ const Questions = {
     text:
       "You get a ride request on the way there, do you take the detour to fulfill it but risk being late to the meeting?",
     picture:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk1KGkuYzm-SAkWKad6Xe-eQXUzrcAha6zTXVbPfLzdDb4II-Gu4K0_yQX-kk0F6KXGqs&usqp=CAU",
+      "http://www.bnnbloomberg.ca/polopoly_fs/1.1322221!/fileimage/httpImage/image.jpg_gen/derivatives/landscape_620/uber-lyft-driver.jpg",
     options: [
       {
         potential: { 0: "r-3-5" },
@@ -528,7 +540,7 @@ const Questions = {
         potential: { 0: "r-3-5" },
         text: "Yes - can't turn down money",
         impact: {
-          cash: 30,
+          cash: 40,
           environment: -3,
         },
       },
@@ -544,16 +556,15 @@ const Questions = {
         potential: { 0: "r-3-5" },
         text: "Cookies 👀 ? Your mind has been swayed",
         impact: {
-          cash: -25,
           environment: -5,
-          health: 10,
+          health: 12,
         },
       },
       {
         potential: { 0: "r-3-6" },
         text: "Cookies are nice, but income comes first",
         impact: {
-          cash: 15,
+          cash: 40,
           environment: -2,
         },
       },
@@ -563,12 +574,10 @@ const Questions = {
     text:
       "You arrive at the meeting just in time for things to get interesting",
     picture:
-      "https://techcrunch.com/wp-content/uploads/2019/08/GWR_UberIPO_050819-36.jpg",
+      "https://www.cnet.com/a/img/1hciSJEgDR4AfHJr6ZuKU_WdaYk=/940x0/2019/11/06/f24a3fef-5bc3-487d-889e-1053f8c27af0/20191106-111451-1.jpg",
     subtext:
       "People are not happy about the efforts of ridesharing companies to pass legislation that would revoke your lawful status as an employee.",
     impact: {
-      rating: 4,
-      cash: 30,
       environment: -3,
     },
     next: "d-4-5",
@@ -579,9 +588,7 @@ const Questions = {
       "https://thumbs.dreamstime.com/b/june-minsk-belarus-cameraman-large-camera-takes-pictures-people-protest-june-minsk-belarusian-people-walk-188548051.jpg",
     subtext: "You get to participate after all, though in a limited manner.",
     impact: {
-      rating: 4,
-      cash: 30,
-      environment: -3,
+      environment: 3,
     },
     next: "d-4-5",
   },
@@ -601,7 +608,7 @@ const Questions = {
         text:
           "There's no point protesting, a week's worth of driving lost would be a pretty big hit to your bank account.",
         impact: {
-          cash: 15,
+          cash: 40,
           environment: -2,
         },
       },
@@ -641,7 +648,7 @@ const Questions = {
       "It was almost bound to happen with all the lobbying power of the rideshare companies. At least you didn't waste a week's worth of driving in a futile protest",
     impact: {
       health: -10,
-      cash: 30,
+      cash: 50,
       environment: -5,
     },
     next: "r-3-10",
@@ -650,10 +657,10 @@ const Questions = {
     text:
       "After a hectic week, with all the legislation news going around you decide to take a small break and count your earnings",
     picture:
-      "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iKBq0OP0G.6Q/v0/1000x-1.jpg",
-    subtext: "You found that you earned an additional $100 this week",
+      "https://media2.giphy.com/media/p6zElcl27INBS/giphy.gif?cid=ecf05e47vkxxa0u4wtrrfybg47eryi2s9r40k3gkie8ddodj&rid=giphy.gif",
+    subtext: "You found that you earned an additional $205 this week",
     impact: {
-      cash: 100,
+      cash: 205,
     },
     next: "d-5",
   },
@@ -673,7 +680,7 @@ const Questions = {
         text:
           "Continue driving, this is nothing you haven't experienced before",
         impact: {
-          cash: 40,
+          cash: 80,
           rating: 4.5,
           environment: -3,
         },
@@ -714,16 +721,18 @@ const Questions = {
   },
   "r-5": {
     text:
-      "Getting back on the road, you manage to take a few rides before calling it a day",
+      "Getting back on the road, you manage to take a few rides before the end of the week",
     picture:
       "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iKBq0OP0G.6Q/v0/1000x-1.jpg",
-    subtext: "You end up securing $80 for the day",
-    impact: {},
+    subtext: "You end up securing $135 for the day",
+    impact: {
+      cash: 135,
+    },
     next: "r-6",
   },
   "r-6": {
     text: "You decide to take a break from ridesharing",
-    picture: "https://ak.picdn.net/shutterstock/videos/2475944/thumb/1.jpg",
+    picture: "https://media2.giphy.com/media/l0ExbyXKaDydXjH3y/giphy.gif",
     subtext:
       "Ridesharing has been an eye opening experience, but has also been filled with many challenges.",
     impact: {},

@@ -67,6 +67,11 @@ const Home = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Set a nickname"
+              inputProps={{
+                style: {
+                  padding: "12px 16px",
+                },
+              }}
             />
           </Row>
           <Row className={classes.centered}>

@@ -71,32 +71,41 @@ const QuestionView = ({
           </>
         ) : (
           <>
-            <Typography style={{ paddingTop: "12px" }} variant="body1">
+            <Typography style={{ padding: "12px 0" }} variant="body1">
               {data.subtext}
             </Typography>
           </>
         )}
 
         <Row style={{ justifyContent: "flex-end", margin: 0 }}>
-          <ReplayIcon
-            style={{
-              cursor: "pointer",
-              color: "lightgray",
-              margin: "4px 8px 0 0",
-            }}
+          <Button
+            style={{ color: "gray" }}
             onClick={() => {
               window.location.reload();
             }}
-          />
-
-          {showPrev && (
-            <Button
-              onClick={() => {
-                goBack();
-              }}
-            >
-              Undo
-            </Button>
+          >
+            Restart
+          </Button>
+          {false && (
+            <>
+              <Button
+                onClick={() => {
+                  goBack();
+                }}
+              >
+                Undo
+              </Button>
+              <ReplayIcon
+                style={{
+                  cursor: "pointer",
+                  color: "lightgray",
+                  margin: "4px 8px 0 0",
+                }}
+                onClick={() => {
+                  window.location.reload();
+                }}
+              />
+            </>
           )}
 
           <Button

@@ -7,6 +7,8 @@ import LocalAtmIcon from "@material-ui/icons/LocalAtm";
 import { useHistory } from "react-router-dom";
 import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
+import LinearProgressWithLabel from "./components/Progress";
+
 import "./App.css";
 
 const useStyles = makeStyles({
@@ -38,9 +40,9 @@ const useStyles = makeStyles({
 
 const initialValues = {
   cash: 2000,
-  health: 100,
+  health: 80,
   rating: [],
-  environment: 100,
+  environment: 80,
 };
 
 const Game = () => {
@@ -50,10 +52,11 @@ const Game = () => {
   const [health, setHealth] = useState(initialValues.health);
   const [rating, setRating] = useState(initialValues.rating);
   const [environment, setEnvironment] = useState(initialValues.environment);
-  const [selected, setSelected] = useState("d-1");
+  const [selected, setSelected] = useState("r00");
   const [showPrev, setShowPrev] = useState(false);
   const [previous, setPrevious] = useState({});
   const [fade, setFade] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const stateController = {
     cash: { setVal: setCash, val: cash },
@@ -67,7 +70,6 @@ const Game = () => {
       setShowPrev(true);
       setPrevious({ selected, cash, health, rating, environment });
       for (const [key, value] of Object.entries(impact)) {
-        console.log(key, value);
         const curVal = stateController[key].val;
         if (Array.isArray(curVal)) {
           stateController[key].setVal(curVal.concat([value]));
@@ -77,6 +79,8 @@ const Game = () => {
   };
 
   const goNext = (id) => {
+    if ((id.charAt(0) == "r" && id.length === 3) || id === "d-4-2")
+      setProgress(progress + 12.5);
     if (id === "end")
       history.push({
         pathname: "/result",
@@ -144,6 +148,8 @@ const Game = () => {
                 </span>
               </Col>
             </Row>
+            <LinearProgressWithLabel variant="determinate" value={progress} />
+
             <div
               onAnimationEnd={() => setFade(false)}
               className={fade ? "fade" : ""}

@@ -72,7 +72,12 @@ const useStyles = makeStyles({
   },
 });
 
-const TabToSection = ["rating", "cash", "environment", "health"];
+const bigFacts = [
+  "Ride-sharing drivers often overlook their own health and wellness in order to keep up with new fares. In poorly regulated regions, low barriers to driver entry result in an oversupply of drivers struggling to find riders. In fact, drivers in these areas report spending half their time waiting for a fare. This coupled with the pandemic, may lead to 80+ hour work weeks [1], driving in conditions that may pose serious health and safety risks. [2]",
+  "As ride-sharing services expand, it's important for governments to help enact policies that will protect worker rights and job security. In some jurisdictions, ride-sharing giants such as Uber and Lyft have already been able to successfully classify workers as independent contractors. For example, in California, Proposition 22 was passed in November 2020. This proposition denies drivers the traditional employee benefits such as paid family leave, sick pay, insurance and much more, sacrificing driver welfare to increase company profits [3].",
+  "Ride-sharing services has been known to divert commuters from environmentally friendly options, such as walking, biking, or public transit [4]. An increase in greenhouse gas emissions can be seen as commuters slowly shift towards ride-sharing services for their convenience and comfort. It's been found that the average trip produces approximately 69% more emissions than the trips they were replacing [4]. Around 40% of the miles driven by rideshare vehicles don’t have passengers, which is also known as “deadheading” [5], these drivers instead are travelling between hired rides, in order to pick up or find new passengers.",
+];
+
 const secretFormula = ({ cash, rating, environment, health }) => {
   return (
     25 * (cash / 2000) +
@@ -82,12 +87,32 @@ const secretFormula = ({ cash, rating, environment, health }) => {
   );
 };
 
+const computeVal = (val, otherVal, greatest) => {
+  var isMax = true;
+  if (greatest) {
+    for (let other of otherVal) {
+      if (val <= other) {
+        isMax = false;
+        break;
+      }
+    }
+  } else {
+    for (let other of otherVal) {
+      if (val >= other) {
+        isMax = false;
+        break;
+      }
+    }
+  }
+  return isMax;
+};
+
 const Result = () => {
   const location = useLocation();
   const history = useHistory();
   const classes = useStyles();
   const data = (location && location.state && location.state.data) || null;
-  const [section, setSection] = useState("rating");
+  const [section, setSection] = useState(0);
   const [hideBoard, setHide] = useState(true);
   const [board, setBoard] = useState("");
   const renderStars = (rating) => {
@@ -101,6 +126,46 @@ const Result = () => {
     }
     return stars;
   };
+
+  const greatestMsg = computeVal(
+    data.cash - 2200,
+    [data.rating * 20, data.environment, data.health],
+    true
+  )
+    ? `${data.cash - 2000} earned`
+    : computeVal(
+        data.rating * 20,
+        [data.cash - 2200, data.environment, data.health],
+        true
+      )
+    ? `${data.rating.toFixed(2)} rating`
+    : computeVal(
+        data.environment,
+        [data.rating * 20, data.cash - 2200, data.health],
+        true
+      )
+    ? `${data.environment}/100 rating`
+    : `${data.health}/100 rating`;
+
+  const leastMsg = computeVal(
+    data.cash - 2200,
+    [data.rating * 20, data.environment, data.health],
+    false
+  )
+    ? `finances`
+    : computeVal(
+        data.rating * 20,
+        [data.cash - 2200, data.environment, data.health],
+        false
+      )
+    ? `driver rating`
+    : computeVal(
+        data.environment,
+        [data.rating * 20, data.cash - 2200, data.health],
+        false
+      )
+    ? `environment rating`
+    : `health & wellness`;
 
   useEffect(() => {
     if (!data || !data.id || data.id !== "end") {
@@ -271,7 +336,6 @@ const Result = () => {
               </Typography>
             </Col>
           </Row>
-
           <Card className={classes.card}>
             <CardContent>
               {!hideBoard ? (
@@ -283,109 +347,69 @@ const Result = () => {
                     color="textSecondary"
                     gutterBottom
                   >
-                    Here's a breakdown of your score:
+                    Congrats on reaching the end! 🎉
+                    <br />
+                    <span style={{ fontWeight: "500" }}>
+                      {" "}
+                      Here's a breakdown of your score:
+                    </span>
                   </Typography>
+                  <Row style={{ margin: 0 }}>
+                    <Col style={{ cursor: "pointer" }}>
+                      <Row>
+                        <span className={classes.caption}>
+                          Average rider rating of {data.rating.toFixed(2)}
+                        </span>
+                      </Row>
+                      <Row>
+                        <span style={{ color: "gray" }}>
+                          {renderStars(data.rating)}
+                        </span>
+                      </Row>
+                      <div style={{ height: 5 }} />
+                    </Col>
 
-                  <Tabs
-                    value={TabToSection.indexOf(section)}
-                    onChange={(event, newVal) =>
-                      setSection(TabToSection[newVal])
-                    }
-                    variant="scrollable"
-                    scrollButtons="off"
-                  >
-                    <Tab
-                      component={() => (
-                        <Col
-                          style={{ cursor: "pointer" }}
-                          onClick={() => {
-                            setSection(TabToSection[0]);
-                          }}
-                        >
-                          <Row>
-                            <span className={classes.caption}>
-                              Average rider rating of {data.rating.toFixed(2)}
-                            </span>
-                          </Row>
-                          <Row>
-                            <span style={{ color: "gray" }}>
-                              {renderStars(data.rating)}
-                            </span>
-                          </Row>
-                          <div style={{ height: 5 }} />
-                        </Col>
-                      )}
-                    />
-                    <Tab
-                      component={() => (
-                        <Col
-                          style={{ cursor: "pointer" }}
-                          onClick={() => {
-                            setSection(TabToSection[1]);
-                          }}
-                        >
-                          <Row>
-                            <span className={classes.caption}>
-                              Finished with
-                            </span>
-                          </Row>
-                          <Row>
-                            <span className={classes.statText}>
-                              {" "}
-                              {data.cash} CAD
-                            </span>
-                          </Row>
-                          <div style={{ height: 5 }} />
-                        </Col>
-                      )}
-                    />
-                    <Tab
-                      component={() => (
-                        <Col
-                          style={{ cursor: "pointer" }}
-                          onClick={() => {
-                            setSection(TabToSection[2]);
-                          }}
-                        >
-                          <Row>
-                            <span className={classes.caption}>
-                              Environment rating
-                            </span>
-                          </Row>
-                          <Row>
-                            <span className={classes.statText}>
-                              {" "}
-                              {data.environment}
-                            </span>
-                          </Row>
-                          <div style={{ height: 5 }} />
-                        </Col>
-                      )}
-                    />
-                    <Tab
-                      component={() => (
-                        <Col
-                          style={{ cursor: "pointer" }}
-                          onClick={() => {
-                            setSection(TabToSection[3]);
-                          }}
-                        >
-                          <Row>
-                            <span className={classes.caption}>
-                              Driver health
-                            </span>
-                          </Row>
-                          <Row>
-                            <span className={classes.statText}>
-                              {" "}
-                              {data.health} /100
-                            </span>
-                          </Row>
-                          <div style={{ height: 5 }} />
-                        </Col>
-                      )}
-                    />
-                  </Tabs>
+                    <Col style={{ cursor: "pointer" }}>
+                      <Row>
+                        <span className={classes.caption}>Finished with</span>
+                      </Row>
+                      <Row>
+                        <span className={classes.statText}>
+                          {" "}
+                          ${data.cash} CAD
+                        </span>
+                      </Row>
+                      <div style={{ height: 5 }} />
+                    </Col>
+
+                    <Col style={{ cursor: "pointer" }}>
+                      <Row>
+                        <span className={classes.caption}>
+                          Environment rating
+                        </span>
+                      </Row>
+                      <Row>
+                        <span className={classes.statText}>
+                          {" "}
+                          {data.environment} /100
+                        </span>
+                      </Row>
+                      <div style={{ height: 5 }} />
+                    </Col>
+
+                    <Col style={{ cursor: "pointer" }}>
+                      <Row>
+                        <span className={classes.caption}>Driver health</span>
+                      </Row>
+                      <Row>
+                        <span className={classes.statText}>
+                          {" "}
+                          {data.health} /100
+                        </span>
+                      </Row>
+                      <div style={{ height: 5 }} />
+                    </Col>
+                  </Row>
                   <div style={{ height: 15 }} />
                   <CardMedia
                     style={{
@@ -393,28 +417,70 @@ const Result = () => {
                       margin: "0 -16px",
                       marginBottom: "16px",
                     }}
-                    image="https://d3i6fh83elv35t.cloudfront.net/newshour/app/uploads/2014/10/Uber-driver-2-1024x768.jpg"
+                    image="https://media0.giphy.com/media/nOeD0X0WnwxIA/giphy.gif"
                   />
+
+                  <Typography
+                    className={classes.title}
+                    color="textSecondary"
+                    gutterBottom
+                    style={{ fontWeight: "500" }}
+                  >
+                    Conclusion
+                  </Typography>
+                  <Typography
+                    style={{ color: "#555555", marginBottom: "12px" }}
+                    variant="body2"
+                    component="p"
+                  >
+                    The purpose of our game is to highlight how hard it can be
+                    to prioritize self care, the environment and your finances
+                    at the same time. With demanding passengers and exploitative
+                    ridesharing companies, being a rideshare driver is tough.
+                    While you tried your best to make the most out of your
+                    driving days, with an impressive {greatestMsg}, it seems
+                    that your {leastMsg} had to take a hit in return. To learn
+                    more about the different environmental and social impacts
+                    ridesharing has, check out the following:
+                  </Typography>
+
+                  <Tabs
+                    style={{ paddingBottom: "12px", marginLeft: "-16px" }}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    value={section}
+                    onChange={(event, newVal) => setSection(section)}
+                    variant="scrollable"
+                    scrollButtons="off"
+                  >
+                    <Tab label="Worker Rights" onClick={() => setSection(0)} />
+                    <Tab
+                      label="Driver Legislation"
+                      onClick={() => setSection(1)}
+                    />
+                    <Tab
+                      label="Environmental Impacts"
+                      onClick={() => setSection(2)}
+                    />
+                  </Tabs>
                   <Typography
                     style={{ color: "#555555" }}
                     variant="body2"
                     component="p"
                   >
-                    With an average rider rating of 4.6With an average rider
-                    rating of 4.6With an average rider rating of 4.6With an
-                    average rider rating of 4.6With an average rider rating of
-                    4.6With an average rider rating of 4.6With an average rider
-                    rating of 4.6With an average rider rating of 4.6With an
-                    average rider rating of 4.6With an average rider rating of
-                    4.6With an average rider rating of 4.6With an average rider
-                    rating of 4.6With an average rider rating of 4.6With an
-                    average rider rating of 4.6With an average rider rating of
-                    4.6With an average rider rating of 4.6With an average rider
-                    rating of 4.6With an average rider rating of 4.6With an
-                    average rider rating of 4.6With an average rider rating of
-                    4.6With an average rider rating of 4.6With an average rider
-                    rating of 4.6With an average rider rating of 4.6With an
-                    average rider rating of 4.6
+                    {bigFacts[section]}
+                    <Button
+                      color="primary"
+                      style={{ margin: "-6px", marginLeft: "6px" }}
+                      onClick={() => {
+                        window.open(
+                          "https://www.notion.so/References-a14e4ac37b8f4bab9b039b2c27b5d331",
+                          "_blank"
+                        );
+                      }}
+                    >
+                      References
+                    </Button>
                   </Typography>
                 </>
               )}
@@ -427,11 +493,23 @@ const Result = () => {
               >
                 <Button
                   onClick={() => {
+                    window.open(
+                      "https://forms.gle/tfqkqU8z5jzQeTqN8",
+                      "_blank"
+                    );
+                  }}
+                >
+                  Take our Survey
+                </Button>
+
+                <Button
+                  onClick={() => {
                     setHide(!hideBoard);
                   }}
                 >
                   {hideBoard ? "View Leaderboard" : "Hide Leaderboard"}
                 </Button>
+
                 <Button
                   onClick={() => {
                     history.push("/game");
