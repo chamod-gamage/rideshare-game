@@ -138,14 +138,14 @@ const Result = () => {
         [data.cash - 2200, data.environment, data.health],
         true
       )
-    ? `${data.rating.toFixed(2)} rating`
+    ? `${data.rating.toFixed(2)} driver rating`
     : computeVal(
         data.environment,
         [data.rating * 20, data.cash - 2200, data.health],
         true
       )
-    ? `${data.environment}/100 rating`
-    : `${data.health}/100 rating`;
+    ? `${data.environment}/100 environmental rating`
+    : `${data.health}/100 health & wellness rating`;
 
   const leastMsg = computeVal(
     data.cash - 2200,
