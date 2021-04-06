@@ -79,7 +79,7 @@ const Home = () => {
               disabled={name === ""}
               style={{
                 marginTop: "32px",
-                border: "2px solid rgba(87, 159, 163, 0.5)",
+                border: "2px solid",
               }}
               onClick={() => {
                 localStorage.setItem("rideshare", name);

@@ -16,7 +16,6 @@ import { useHistory } from "react-router-dom";
 const useStyles = makeStyles({
   root: {
     borderRadius: "12px",
-    width: "620px",
     marginTop: "36px",
   },
 });

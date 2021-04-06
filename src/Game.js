@@ -11,10 +11,10 @@ import LinearProgressWithLabel from "./components/Progress";
 
 import "./App.css";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   container: {
     height: "100vh",
-    padding: "6% 15%",
+    padding: "6%",
   },
   centered: {
     display: "flex",
@@ -36,7 +36,15 @@ const useStyles = makeStyles({
     fontSize: "14px",
     color: "gray",
   },
-});
+  cardWidth: {
+    [theme.breakpoints.down("sm")]: {
+      width: "90%",
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "60%",
+    },
+  },
+}));
 
 const initialValues = {
   cash: 2000,
@@ -116,10 +124,10 @@ const Game = () => {
     const roundedRating = Math.round(rating);
     var stars = [];
     for (var i = 0; i < roundedRating; i++) {
-      stars.push(<StarIcon />);
+      stars.push(<StarIcon style={{ width: "1.2vw" }} />);
     }
     for (var j = 0; j < 5 - roundedRating; j++) {
-      stars.push(<StarBorderIcon />);
+      stars.push(<StarBorderIcon style={{ width: "1.2vw" }} />);
     }
     return stars;
   };
@@ -128,7 +136,7 @@ const Game = () => {
     <div style={{ backgroundImage: "linear-gradient(#fffcf8, #b7dfe9)" }}>
       <Container className={classes.container}>
         <Row className={classes.centered}>
-          <div>
+          <div className={classes.cardWidth}>
             <Row style={{ margin: 0 }}>
               <Col xs="6">
                 <h1
@@ -138,7 +146,10 @@ const Game = () => {
                   drive<span style={{ color: "#579fa3" }}>.ai 🚘</span>
                 </h1>
               </Col>
-              <Col className={classes.left} style={{ padding: 0 }}>
+              <Col
+                className={classes.left}
+                style={{ padding: 0, justifyContent: "flex-end" }}
+              >
                 <span className={classes.statText}>
                   <LocalAtmIcon />
                   <span style={{ margin: "0 12px" }}>{cash}</span>
