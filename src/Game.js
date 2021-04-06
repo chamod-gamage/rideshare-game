@@ -87,8 +87,11 @@ const Game = () => {
   };
 
   const goNext = (id) => {
-    if ((id.charAt(0) == "r" && id.length === 3) || id === "d-4-2")
+    if (id === "r00") {
+      setProgress(0);
+    } else if ((id.charAt(0) == "r" && id.length === 3) || id === "d-4-2") {
       setProgress(progress + 12.5);
+    }
     if (id === "end")
       history.push({
         pathname: "/result",
@@ -113,6 +116,15 @@ const Game = () => {
     setRating(previous.rating);
     setEnvironment(previous.environment);
     goNext(previous.selected);
+  };
+
+  const restart = () => {
+    setShowPrev(false);
+    setCash(initialValues.cash);
+    setHealth(initialValues.health);
+    setRating(initialValues.rating);
+    setEnvironment(initialValues.environment);
+    goNext("r00");
   };
 
   const computeRating = (rating) => {
@@ -173,6 +185,7 @@ const Game = () => {
                 showPrev={showPrev}
                 goNext={goNext}
                 goBack={goBack}
+                restart={restart}
               />
             </div>
           </div>

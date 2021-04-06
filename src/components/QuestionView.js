@@ -12,6 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import { CardMedia } from "@material-ui/core";
 import ReplayIcon from "@material-ui/icons/Replay";
 import { useHistory } from "react-router-dom";
+import { RestaurantTwoTone } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   root: {
@@ -28,6 +29,7 @@ const QuestionView = ({
   showPrev,
   goNext,
   goBack,
+  restart,
 }) => {
   const classes = useStyles();
   const history = useHistory();
@@ -80,7 +82,7 @@ const QuestionView = ({
           <Button
             style={{ color: "gray" }}
             onClick={() => {
-              window.location.reload();
+              restart();
             }}
           >
             Restart
@@ -101,7 +103,7 @@ const QuestionView = ({
                   margin: "4px 8px 0 0",
                 }}
                 onClick={() => {
-                  window.location.reload();
+                  restart();
                 }}
               />
             </>
