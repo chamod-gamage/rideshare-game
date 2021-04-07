@@ -3,7 +3,7 @@ const Questions = {
     text: "Welcome to your ride-sharing adventure!",
     picture: "https://media4.giphy.com/media/l1J9w8WgJkwpREQlG/giphy.gif",
     subtext:
-      "Do you have what the drive it takes to make it in the ride-sharing world?",
+      "Do you have the drive it takes to make it in the ride-sharing world?",
     next: "r-0",
   },
   "r-0": {
