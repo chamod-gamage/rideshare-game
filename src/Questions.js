@@ -2,14 +2,15 @@ const Questions = {
   r00: {
     text: "Welcome to your ride-sharing adventure!",
     picture: "https://media4.giphy.com/media/l1J9w8WgJkwpREQlG/giphy.gif",
-    subtext: "Do you have what it takes to make it in the ride-sharing world?",
+    subtext:
+      "Do you have what the drive it takes to make it in the ride-sharing world?",
     next: "r-0",
   },
   "r-0": {
     text: "This is a choose your own adventure style game",
     picture: "https://media0.giphy.com/media/2jOcXFwhIEypPeQvOY/200.gif",
     subtext:
-      "Progress through the game by making strategic decisions - once you proceed with an option you won't be able to go back! Try your best to earn as much money and as high a rating as possible, but remember - your decisions may impact your personal health as well as the environment.",
+      "You'll be living out the life of a ride-share driver to get a feel of what they have to go through. Progress through the game by making strategic decisions - once you proceed with an option you won't be able to go back! Try your best to earn as much money and as high a rating as possible, but remember: your decisions may also impact your personal health as well as the environment.",
     next: "d-1",
   },
 
@@ -41,6 +42,7 @@ const Questions = {
         impact: {
           cash: -500,
           health: 5,
+          environment: 10,
         },
       },
     ],
@@ -63,16 +65,16 @@ const Questions = {
       {
         potential: { 0: "d-1-3" },
         text:
-          "Partial coverage insurance - will help cover 50% of damages ($250)",
+          "Partial coverage insurance - will help cover 50% of accidents ($250)",
         impact: {
           cash: -250,
         },
       },
       {
         potential: { 0: "d-1-3" },
-        text: "Premium insurance - fully cover any damages ($400)",
+        text: "Premium insurance - fully cover any accidents ($300)",
         impact: {
-          cash: -400,
+          cash: -300,
           health: 5,
         },
       },
@@ -80,7 +82,7 @@ const Questions = {
   },
   "d-1-3": {
     text:
-      "With COVID restrictions, many drivers are being encouraged to install a plexiglass screen between the front and back seats.",
+      "With COVID cases ramping up, many drivers now face risk of infection. Your family is encouraging you to install a plexiglass screen between the front and back seats.",
     picture:
       "https://ewscripps.brightspotcdn.com/d1/0d/ba3339eb446bac4e9f03b1af3c1f/partition.jpg",
     options: [
@@ -124,9 +126,9 @@ const Questions = {
   },
   "r-1": {
     text:
-      "You decide to head out for the day and accept your first ride as an rideshare driver",
+      "You decide to head out for the day and accept your first ride as a rideshare driver",
     picture: "https://i.gifer.com/7rVF.gif",
-    subtext: "Time to see what being a ridehsare driver is all about!",
+    subtext: "Time to see what being a rideshare driver is all about!",
     next: "d-2",
   },
   "d-2": {
@@ -182,17 +184,17 @@ const Questions = {
   },
   "d-2-2": {
     text:
-      "You stumble across a trip from Toronto to Waterloo valued at $175. You will likely miss your Dad's birthday since this trip will likely take up most of your day, do you choose to accept?",
+      "You stumble across a trip from Toronto to Waterloo valued at $175. You will likely miss your Dad's birthday since this trip will take up most of your day, do you choose to accept?",
     picture: "https://ak.picdn.net/shutterstock/videos/1009460807/thumb/1.jpg",
     options: [
       {
-        potential: { 0: "r-2" },
-        text: "Accept the trip and start the drive to Waterloo",
+        potential: { 0: "r-1-1-1" },
+        text: "Accept the trip and start the drive to Waterloo ($175)",
         impact: {
           cash: 175,
-          health: -5,
+          health: -6,
           rating: 4.5,
-          environment: -2,
+          environment: -6,
         },
       },
       {
@@ -204,8 +206,17 @@ const Questions = {
       },
     ],
   },
+  "r-1-1-1": {
+    text:
+      "You take on the ride, but get stuck in a traffic jam on the way there. You spend more time idling than actually driving.",
+    picture: "https://verde.ie/wp-content/uploads/2018/06/car-emissiona.png",
+    subtext:
+      "After an exhausting day spent stuck in traffic, you drop off your passenger and head home.",
+    next: "r-2",
+  },
   "r-1-1": {
-    text: "Your Dad threw an absolute banger of a party.",
+    text:
+      "Your Dad threw an absolute banger of a party. You feel much happier having spent the afternoon with him.",
     picture:
       "https://www.kivodaily.com/wp-content/uploads/2019/08/surprise-birthday-party-for-dad.jpg",
     subtext:
@@ -215,21 +226,22 @@ const Questions = {
 
   "d-2-3": {
     text:
-      "You arrive to the pickup location for a passenger with a 3 star rating and can't find the passenger after 5 minutes, do you",
+      "You spend 10 minutes idling in the car with the engine on, waiting for a passenger with a 2 star rating to show up",
     picture:
-      "https://st4.depositphotos.com/7325898/20905/v/600/depositphotos_209055400-stock-video-young-driver-being-impatient-waiting.jpg",
+      "https://globalnews.ca/wp-content/uploads/2013/03/emissions.jpg?quality=85&strip=all&w=720&h=379&crop=1",
     options: [
       {
         potential: { 0: "d-2-4" },
-        text: "Call the passenger",
-        impact: {},
+        text: "Continue idling, but call the passenger",
+        impact: {
+          environment: -3,
+        },
       },
       {
         potential: { 0: "r-1-2" },
         text: "Cancel the trip",
         impact: {
           health: 2,
-          rating: 2,
         },
       },
     ],
@@ -241,11 +253,10 @@ const Questions = {
     options: [
       {
         potential: { 0: "r-1-3" },
-        text: "Continue waiting",
+        text: "Continue idling, they'll probably show up anytime now",
         impact: {
-          cash: 60,
+          cash: 70,
           environment: -5,
-          health: 2,
           rating: 5,
         },
       },
@@ -254,14 +265,13 @@ const Questions = {
         text: "Cancel the trip",
         impact: {
           health: 2,
-          rating: 2,
         },
       },
     ],
   },
   "r-1-2": {
     text:
-      "There seems to be no sign of the passenger, so to avoid idling you cancel the ride.",
+      "There seems to be no sign of the passenger, so to avoid further idling you cancel the ride.",
     picture:
       "https://specials-images.forbesimg.com/imageserve/1160487949/960x0.jpg?fit=scale",
     subtext:
@@ -269,15 +279,15 @@ const Questions = {
     next: "r-2",
   },
   "r-1-3": {
-    text: "At last the pasenger arrives and you begin the trip.",
+    text: "At last the passenger arrives and you begin the trip.",
     picture:
       "https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_956,h_537/v1575678883/assets/41/d1eac3-b7c3-4bc0-9c05-1bdac0da70b1/original/Header_4x5.jpg",
     subtext:
-      "The passenger is super grateful for your patience and thanks you with a large tip.",
+      "The passenger is super grateful for your patience and thanks you with a  great review and a large tip.",
     next: "r-2",
   },
   "r-2": {
-    text: "After giving out a few more rides, you're ready to call it a day",
+    text: "You've had a long day and are ready to take a break",
     picture:
       "https://media2.giphy.com/media/cmynpRzWNbqOl9CdqT/giphy.gif?cid=ecf05e47h829m7vreca8sfizq96r9b99u011y4geqwv34f2g&rid=giphy.gif",
     subtext: "You pull in an additional $200 from your rides",
@@ -289,7 +299,7 @@ const Questions = {
 
   "d-3": {
     text:
-      "You wake up early and recieve a request from a passenger going to the airport.",
+      "You wake up early and recieve a request from a passenger going to the airport ($80)",
     picture:
       "https://iamsignificantca.lightningbasecdn.com/wp-content/uploads/2012/05/toomuchbaggage-%C2%A9-federicofoto-Fotolia.com_.jpg",
     options: [
@@ -304,7 +314,8 @@ const Questions = {
       },
       {
         potential: { 0: "r-2-1", 0.5: "r-2-2" },
-        text: "Try your best to jam it all in, which may damage your interior",
+        text:
+          "Try your best to jam it all in, you may risk damaging your interior",
         impact: {
           cash: 80,
           environment: -3,
@@ -319,16 +330,17 @@ const Questions = {
     picture:
       "https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_956,h_537/v1561395660/assets/f1/36075b-52ae-4671-bb27-37bdc56a98fd/original/DE2.6.2.jpg",
     subtext: "You receive a good rating and a healthy tip",
-
     next: "d-3-1",
   },
   "r-2-2": {
     text:
       "You complete the trip, but notice that the luggage has damaged your seats.",
     picture: "https://i.redd.it/9uxhr6gs9xh41.jpg",
-    subtext: "Getting them fixed will likely take around $100",
+    subtext:
+      "You stress over finding a repair shop that will repair your seats but eventually settle for a shop that charges $100",
     impact: {
       cash: -100,
+      health: -5,
     },
     next: "d-3-1",
   },
@@ -373,13 +385,11 @@ const Questions = {
   },
   "r-2-4": {
     text:
-      "You finally manage to complete the trip, dropping off your passengers",
+      "You finally manage to complete the trip, dropping off your passengers ($60)",
     picture:
       "https://st4.depositphotos.com/19391574/23206/v/600/depositphotos_232062798-stock-video-womans-leg-in-high-heel.jpg",
     subtext: "That could've went a lot worse!",
-    impact: {
-      cash: 50,
-    },
+    impact: {},
     next: "r-3",
   },
   "d-3-2": {
@@ -390,7 +400,7 @@ const Questions = {
     options: [
       {
         potential: { 0: "r-3" },
-        text: "Send your car to be professionally cleaned",
+        text: "Send your car to be professionally cleaned ($50)",
         impact: {
           cash: -50,
           health: 5,
@@ -447,7 +457,7 @@ const Questions = {
     options: [
       {
         potential: { 0: "r-3-1", 0.5: "r-3-2" },
-        text: "Pick up, she's your mom 🥲",
+        text: "Pick up, she's your mom",
         impact: {},
       },
       {
@@ -461,9 +471,9 @@ const Questions = {
     text: "You answered using your car's speaker system...",
     picture: "https://i.ytimg.com/vi/TGLCAGbHZ7w/maxresdefault.jpg",
     subtext:
-      "The rider found it weird to listen to the whole call, resulting in a lower rating and tip",
+      "The rider found it weird to listen to the whole call, resulting in a lower rating and tip ($30)",
     impact: {
-      rating: 3.5,
+      rating: 2.5,
       cash: 30,
       environment: -3,
     },
@@ -473,7 +483,7 @@ const Questions = {
     text: "You answered using your car's speaker system...",
     picture: "https://i.ytimg.com/vi/TGLCAGbHZ7w/maxresdefault.jpg",
     subtext:
-      "The rider thought your mom seemed very nice and gave you a bigger tip",
+      "The rider thought your mom seemed very nice and gave you a bigger tip ($55)",
     impact: {
       rating: 5,
       cash: 55,
@@ -482,14 +492,15 @@ const Questions = {
     next: "d-4-2",
   },
   "r-3-3": {
-    text: "Choosing to ignore your mother...",
+    text: "Choosing to priotize work...",
     picture:
       "https://graceforsingleparents.com/wp-content/uploads/mom-yelling-at-child.jpg",
-    subtext: "Your mom gets upset with you for not answering her",
+    subtext:
+      "You finish the trip, but your mom gets upset. Working all the time is starting to stress you out.",
     impact: {
       rating: 4,
       cash: 35,
-      health: -3,
+      health: -5,
       environment: -3,
     },
     next: "d-4-2",
@@ -497,7 +508,7 @@ const Questions = {
   "r-3-4": {
     text: "The rider doesn't seem to notice",
     picture: "https://i.ytimg.com/vi/TGLCAGbHZ7w/maxresdefault.jpg",
-    subtext: "You recieve a good rating and tip from the rider",
+    subtext: "You recieve a good rating and tip from the rider ($55)",
     impact: {
       rating: 5,
       cash: 55,
@@ -538,7 +549,7 @@ const Questions = {
       },
       {
         potential: { 0: "r-3-5" },
-        text: "Yes - can't turn down money",
+        text: "Yes - can't turn down money ($40)",
         impact: {
           cash: 40,
           environment: -3,
@@ -621,8 +632,7 @@ const Questions = {
     subtext:
       "You make the national news with your efforts, and even get influencers on social media to start posting a white wheel on a black square to support you. Unfortunately, the financial lobbying power of these companies is too much - with over $1 billion dollars spent in lobbying efforts, the legislation has passed. You are no longer classified as an employee.",
     impact: {
-      health: -10,
-      cash: -200,
+      health: -15,
       environment: +5,
     },
     next: "r-3-10",
@@ -634,8 +644,7 @@ const Questions = {
     subtext:
       "You make the national news with your efforts, and even get influencers on social media to start posting a white wheel on a black square to support you. Somehow, against all odds you manage to inspire enough of your legislators to block the legislation pushed by large rideshare companies.",
     impact: {
-      health: +6,
-      cash: -150,
+      health: +15,
       environment: +5,
     },
     next: "r-3-10",
@@ -651,9 +660,19 @@ const Questions = {
       cash: 50,
       environment: -5,
     },
-    next: "r-3-10",
+    next: "r-3-11",
   },
   "r-3-10": {
+    text:
+      "After a hectic week, with all the legislation news going around you decide to take a break",
+    picture:
+      "https://media2.giphy.com/media/p6zElcl27INBS/giphy.gif?cid=ecf05e47vkxxa0u4wtrrfybg47eryi2s9r40k3gkie8ddodj&rid=giphy.gif",
+    subtext:
+      "Although you missed out on income this week, you're happy to have stood up for yourself",
+    impact: {},
+    next: "d-5",
+  },
+  "r-3-11": {
     text:
       "After a hectic week, with all the legislation news going around you decide to take a small break and count your earnings",
     picture:
@@ -678,9 +697,9 @@ const Questions = {
       {
         potential: { 0: "r-4-1", 0.5: "r-4-2" },
         text:
-          "Continue driving, this is nothing you haven't experienced before",
+          "Continue driving, this is nothing you haven't experienced before ($60)",
         impact: {
-          cash: 80,
+          cash: 60,
           rating: 4.5,
           environment: -3,
         },
