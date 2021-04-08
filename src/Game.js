@@ -145,7 +145,12 @@ const Game = () => {
   };
 
   return (
-    <div style={{ backgroundImage: "linear-gradient(#fffcf8, #b7dfe9)" }}>
+    <div
+      style={{
+        backgroundImage: "linear-gradient(#fffcf8, #b7dfe9)",
+        overflow: "auto",
+      }}
+    >
       <Container className={classes.container}>
         <Row className={classes.centered}>
           <div className={classes.cardWidth}>
